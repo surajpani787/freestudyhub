@@ -402,9 +402,12 @@ export default function Navbar({
           <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full p-[1px] bg-slate-800 border border-slate-700 shadow-sm group-hover:border-slate-600 group-hover:scale-105 transition-all duration-200">
             <div className="w-full h-full bg-[#0e121d] rounded-full flex items-center justify-center font-bold text-xs text-slate-200 uppercase tracking-wider overflow-hidden">
               {userSession?.avatar && userSession.avatar !== "/user.png" ? (
-                <img
+                <Image
                   src={userSession.avatar}
-                  alt={userSession.name}
+                  alt={userSession.name || "User Avatar"}
+                  width={36}
+                  height={36}
+                  unoptimized
                   className="w-full h-full object-cover"
                 />
               ) : (
@@ -428,9 +431,12 @@ export default function Navbar({
                 <div className="w-10 h-10 rounded-full p-[1px] bg-slate-800 border border-slate-700 shrink-0">
                   <div className="w-full h-full bg-[#0e121d] rounded-full flex items-center justify-center font-bold text-sm text-white uppercase overflow-hidden">
                     {userSession?.avatar && userSession.avatar !== "/user.png" ? (
-                      <img
+                      <Image
                         src={userSession.avatar}
-                        alt={userSession.name}
+                        alt={userSession.name || "User Avatar"}
+                        width={40}
+                        height={40}
+                        unoptimized
                         className="w-full h-full object-cover"
                       />
                     ) : (
@@ -669,9 +675,12 @@ export default function Navbar({
                     <div className="flex items-center gap-2.5">
                       <div className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-200 font-bold text-xs overflow-hidden">
                         {userSession?.avatar && userSession.avatar !== "/user.png" ? (
-                          <img
+                          <Image
                             src={userSession.avatar}
-                            alt={userSession.name}
+                            alt={userSession.name || "User Avatar"}
+                            width={32}
+                            height={32}
+                            unoptimized
                             className="w-full h-full object-cover"
                           />
                         ) : (

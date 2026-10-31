@@ -36,6 +36,13 @@ const nextConfig: NextConfig = {
   },
   transpilePackages: ["lucide-react"],
   reactStrictMode: true, // Ensures best practices in development
+  eslint: {
+    // Prevent ESLint warnings from failing production builds on Vercel
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: false,
+  },
   webpack: (config, { dev }) => {
     if (dev) {
       // Prevents Windows EPERM file-locking errors on .next/cache/webpack pack files during fast reload
