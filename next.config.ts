@@ -1,3 +1,6 @@
+// Suppress internal Node.js 22 engine deprecation notices (such as DEP0205) during Next.js builds
+(process as unknown as { noDeprecation: boolean }).noDeprecation = true;
+
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
