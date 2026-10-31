@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "@clerk/nextjs": "^7.9.17",
     "framer-motion": "^12.23.12",
