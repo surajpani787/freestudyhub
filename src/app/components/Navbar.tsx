@@ -24,9 +24,9 @@ import { useUser, useClerk } from "@clerk/nextjs";
 
 const hasValidClerkKey = Boolean(
   process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
-    !process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.includes("YOUR_CLERK") &&
-    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.startsWith("pk_") &&
-    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.length > 30
+  !process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.includes("YOUR_CLERK") &&
+  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.startsWith("pk_") &&
+  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.length > 30
 );
 
 // Public navigation links (Before login: Home, About, Contact)
@@ -272,9 +272,9 @@ export default function Navbar({
 
     // 4. Background fire-and-forget server / Clerk cleanup (asynchronous & non-blocking)
     if (clerkSignOutRef.current) {
-      clerkSignOutRef.current().catch(() => {});
+      clerkSignOutRef.current().catch(() => { });
     }
-    fetch("/api/demo-auth", { method: "DELETE" }).catch(() => {});
+    fetch("/api/demo-auth", { method: "DELETE" }).catch(() => { });
   };
 
   // Immediate synchronous auth check - zero flash on SSR or reload
@@ -289,11 +289,10 @@ export default function Navbar({
           <Link
             key={href}
             href={href}
-            className={`group relative py-2 text-xs sm:text-sm transition-all duration-150 ${
-              isActive
+            className={`group relative py-2 text-xs sm:text-sm transition-all duration-150 ${isActive
                 ? "text-white font-semibold"
                 : "text-slate-400 hover:text-white font-medium"
-            }`}
+              }`}
           >
             <span className="inline-flex items-center gap-1.5">
               <span>{label}</span>
@@ -331,11 +330,10 @@ export default function Navbar({
           <Link
             key={href}
             href={href}
-            className={`group relative py-2 text-xs sm:text-sm transition-all duration-150 ${
-              isActive
+            className={`group relative py-2 text-xs sm:text-sm transition-all duration-150 ${isActive
                 ? "text-white font-semibold"
                 : "text-slate-400 hover:text-white font-medium"
-            }`}
+              }`}
           >
             <span className="inline-flex items-center gap-1.5">
               <span>{label}</span>
@@ -531,9 +529,8 @@ export default function Navbar({
   return (
     <header
       suppressHydrationWarning
-      className={`sticky top-0 z-50 w-full px-3 sm:px-6 lg:px-8 transition-all duration-300 ${
-        scrolled ? "pt-2 sm:pt-2.5" : "pt-3 sm:pt-4"
-      }`}
+      className={`sticky top-0 z-50 w-full px-3 sm:px-6 lg:px-8 transition-all duration-300 ${scrolled ? "pt-2 sm:pt-2.5" : "pt-3 sm:pt-4"
+        }`}
     >
       {/* Background non-blocking Clerk bridge */}
       {hasValidClerkKey && <ClerkBridge signOutRef={clerkSignOutRef} />}
@@ -541,21 +538,19 @@ export default function Navbar({
       <nav
         suppressHydrationWarning
         aria-label="Main Navigation"
-        className={`relative max-w-7xl mx-auto rounded-2xl transition-all duration-200 ${
-          scrolled
+        className={`relative max-w-7xl mx-auto rounded-2xl transition-all duration-200 ${scrolled
             ? "bg-[#0d111c]/95 backdrop-blur-xl shadow-xl shadow-black/50 border border-slate-800"
             : "bg-[#0d111c]/80 backdrop-blur-lg border border-slate-800/80 shadow-md"
-        }`}
+          }`}
       >
         {/* Ambient Top Glow Highlight */}
         <div className="absolute inset-x-6 top-0 h-[1px] bg-gradient-to-r from-transparent via-amber-400/20 to-transparent pointer-events-none" />
 
         <div
-          className={`relative z-50 px-4 sm:px-6 h-16 sm:h-18 flex items-center justify-between ${
-            isUserAuthenticated
+          className={`relative z-50 px-4 sm:px-6 h-16 sm:h-18 flex items-center justify-between ${isUserAuthenticated
               ? "lg:grid lg:grid-cols-[1fr_auto_1fr]"
               : "md:grid md:grid-cols-[1fr_auto_1fr]"
-          }`}
+            }`}
         >
           {/* Brand Logo - Flush to Start */}
           <div className="flex items-center justify-start">
@@ -608,34 +603,33 @@ export default function Navbar({
 
             {/* Mobile Menu Button */}
             <div className={`flex ${isUserAuthenticated ? "lg:hidden" : "md:hidden"} items-center gap-2 relative z-50`}>
-            {isUserAuthenticated && (
-              <button
-                onClick={handleInstantSignOut}
-                title="Sign Out"
-                className="p-2 rounded-xl bg-slate-800/80 border border-slate-700/80 text-red-400 hover:bg-slate-700 transition cursor-pointer"
-              >
-                <LogOut size={16} />
-              </button>
-            )}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              aria-expanded={isOpen}
-              aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-              className={`p-2.5 rounded-xl border transition-all cursor-pointer relative z-50 ${
-                isOpen
-                  ? "bg-slate-800 text-amber-300 border-amber-400/60 shadow-lg shadow-amber-400/10 ring-2 ring-amber-400/40"
-                  : "bg-slate-800/80 border-slate-700/80 text-slate-200 hover:text-white hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-400/50"
-              }`}
-            >
-              {isOpen ? (
-                <X size={20} className="text-amber-300 shrink-0" strokeWidth={2.5} />
-              ) : (
-                <Menu size={20} className="shrink-0" />
+              {isUserAuthenticated && (
+                <button
+                  onClick={handleInstantSignOut}
+                  title="Sign Out"
+                  className="p-2 rounded-xl bg-slate-800/80 border border-slate-700/80 text-red-400 hover:bg-slate-700 transition cursor-pointer"
+                >
+                  <LogOut size={16} />
+                </button>
               )}
-            </button>
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                aria-expanded={isOpen}
+                aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+                className={`p-2.5 rounded-xl border transition-all cursor-pointer relative z-50 ${isOpen
+                    ? "bg-slate-800 text-amber-300 border-amber-400/60 shadow-lg shadow-amber-400/10 ring-2 ring-amber-400/40"
+                    : "bg-slate-800/80 border-slate-700/80 text-slate-200 hover:text-white hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-400/50"
+                  }`}
+              >
+                {isOpen ? (
+                  <X size={20} className="text-amber-300 shrink-0" strokeWidth={2.5} />
+                ) : (
+                  <Menu size={20} className="shrink-0" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
         {/* Floating Mobile Navigation Drawer - Floats ABOVE the Hero section without pushing down content */}
         {isOpen && (
@@ -643,17 +637,15 @@ export default function Navbar({
             {/* Backdrop Dimmer to click outside and close */}
             <div
               onClick={() => setIsOpen(false)}
-              className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-xs ${
-                isUserAuthenticated ? "lg:hidden" : "md:hidden"
-              } animate-in fade-in duration-200`}
+              className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-xs ${isUserAuthenticated ? "lg:hidden" : "md:hidden"
+                } animate-in fade-in duration-200`}
               aria-hidden="true"
             />
 
             {/* Floating Popover Card */}
             <div
-              className={`absolute top-[calc(100%+8px)] inset-x-0 z-50 ${
-                isUserAuthenticated ? "lg:hidden" : "md:hidden"
-              } p-4 sm:p-5 rounded-2xl bg-[#0d111c]/95 backdrop-blur-2xl border border-slate-800 shadow-2xl shadow-black/90 animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-200 ease-out`}
+              className={`absolute top-[calc(100%+8px)] inset-x-0 z-50 ${isUserAuthenticated ? "lg:hidden" : "md:hidden"
+                } p-4 sm:p-5 rounded-2xl bg-[#0d111c]/95 backdrop-blur-2xl border border-slate-800 shadow-2xl shadow-black/90 animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-200 ease-out`}
             >
               {/* In-drawer Close Header */}
               <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-800/80">
@@ -711,11 +703,10 @@ export default function Navbar({
                           key={href}
                           href={href}
                           onClick={() => setIsOpen(false)}
-                          className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                            isActive
+                          className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${isActive
                               ? "text-white bg-[#141b2b] border-l-2 border-l-amber-400 shadow-sm"
                               : "text-slate-400 hover:text-white hover:bg-slate-800/40"
-                          }`}
+                            }`}
                         >
                           <div className="flex items-center gap-3">
                             <Icon
@@ -723,13 +714,13 @@ export default function Navbar({
                               className={isActive ? "text-amber-400" : "text-slate-500"}
                             />
                             <span className="inline-flex items-center gap-1.5">
-              <span>{label}</span>
-              {href === "/ai-roadmap" && (
-                <span className="text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 rounded-md bg-amber-400/15 text-amber-300 border border-amber-400/30">
-                  Bot
-                </span>
-              )}
-            </span>
+                              <span>{label}</span>
+                              {href === "/ai-roadmap" && (
+                                <span className="text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 rounded-md bg-amber-400/15 text-amber-300 border border-amber-400/30">
+                                  Bot
+                                </span>
+                              )}
+                            </span>
                           </div>
 
                           <ChevronRight
@@ -751,11 +742,10 @@ export default function Navbar({
                           key={href}
                           href={href}
                           onClick={() => setIsOpen(false)}
-                          className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                            isActive
+                          className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${isActive
                               ? "text-white bg-[#141b2b] border-l-2 border-l-amber-400 shadow-sm"
                               : "text-slate-400 hover:text-white hover:bg-slate-800/40"
-                          }`}
+                            }`}
                         >
                           <div className="flex items-center gap-3">
                             <Icon
@@ -763,13 +753,13 @@ export default function Navbar({
                               className={isActive ? "text-amber-400" : "text-slate-500"}
                             />
                             <span className="inline-flex items-center gap-1.5">
-              <span>{label}</span>
-              {href === "/ai-roadmap" && (
-                <span className="text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 rounded-md bg-amber-400/15 text-amber-300 border border-amber-400/30">
-                  Bot
-                </span>
-              )}
-            </span>
+                              <span>{label}</span>
+                              {href === "/ai-roadmap" && (
+                                <span className="text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 rounded-md bg-amber-400/15 text-amber-300 border border-amber-400/30">
+                                  Bot
+                                </span>
+                              )}
+                            </span>
                           </div>
                           <ChevronRight
                             size={15}
